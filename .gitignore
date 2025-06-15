@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# environment and credentials
+.env
+*.env
+.env.*
+/backend/config/*.json
+!/backend/config/*.example.json
+
+# build
+/dist
+/build
+/frontend/dist
+/backend/dist
+
+# logs
+*.log
+npm-debug.log*
+
+# IDE
+.vscode/
+.idea/

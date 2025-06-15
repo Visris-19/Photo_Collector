@@ -1,0 +1,663 @@
+.photo-capture-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  overflow: hidden;
+}
+
+.camera-app {
+  width: 100vw;
+  height: 100vh;
+  background: #0A1929;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.camera-header {
+  width: 100%;
+  background: linear-gradient(90deg, #0A1929 0%, #1A3D6E 100%);
+  padding: 0.8rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-icon {
+  color: #4FC3F7;
+  font-size: 2rem !important;
+  filter: drop-shadow(0 0 8px rgba(79, 195, 247, 0.5));
+}
+
+.header-title {
+  color: white;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #4FC3F7;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4FC3F7;
+  animation: pulse 2s infinite;
+}
+
+.camera-viewport {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.camera-frame {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  height: 70vh;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #000;
+}
+
+.camera-frame video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none; /* This prevents any overlay elements from being clickable */
+}
+
+.focus-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px;
+  height: 180px;
+  border: 2px solid rgba(79, 195, 247, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(79, 195, 247, 0.1);
+}
+
+.focus-frame[data-focused="true"] {
+  border-color: #4FC3F7;
+  box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
+}
+
+.camera-controls {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.shutter-button {
+  width: 70px;
+  height: 70px;
+  position: relative;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.shutter-ring {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.shutter-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 54px;
+  height: 54px;
+  background: #4FC3F7;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.shutter-button:hover .shutter-core {
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.shutter-button:active .shutter-core {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+.capture-info {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.info-item {
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  backdrop-filter: blur(4px);
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+@keyframes ring-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .camera-header {
+    padding: 0.6rem 1rem;
+  }
+
+  .header-title {
+    font-size: 1.2rem !important;
+  }
+
+  .focus-frame {
+    width: 140px;
+    height: 140px;
+  }
+
+  .camera-frame {
+    height: 60vh;
+    width: 95%;
+  }
+}
+
+.camera-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.app-header {
+  width: 100%;
+  background: linear-gradient(to right, #1a237e, #0d47a1);
+  padding: 1rem;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.app-title {
+  color: white;
+  text-align: center;
+  font-weight: 600 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.camera-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.camera-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px);
+  background-size: 33.33% 33.33%;
+}
+
+.settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.settings-panel {
+  width: 100%;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.settings-form {
+  background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+  padding: 0.8rem;
+  border-radius: 20px;
+  width: 75%;
+  max-width: 350px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #e3f2fd;
+}
+
+.header-icon {
+  font-size: 1.3rem;
+  margin-bottom: 0.1rem;
+}
+
+.form-title {
+  font-size: 1.2rem;
+  margin: 0;
+  background: linear-gradient(45deg, #2196f3, #1565c0);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+
+.form-subtitle {
+  font-size: 0.75rem;
+}
+
+.settings-form .MuiTextField-root {
+  background: white;
+  border-radius: 12px;
+}
+
+.input-group {
+  margin: 16px 0;
+}
+
+.number-input-container {
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.6rem;
+  border-radius: 12px;
+  margin: 0.6rem 0;
+  border: 1px solid #e3f2fd;
+}
+
+.number-input-container:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: #90caf9;
+  box-shadow: 0 4px 12px rgba(33, 150, 243, 0.1);
+}
+
+.number-input-group {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.number-input-group .MuiTextField-root {
+  width: 100px;
+}
+
+.number-input-group input {
+  text-align: center;
+  padding: 4px 24px 4px 8px !important;
+}
+
+.number-input-group .MuiIconButton-root {
+  background-color: #e3f2fd;
+  width: 24px;
+  height: 24px;
+}
+
+.number-input-group .MuiIconButton-root:hover:not(.Mui-disabled) {
+  background-color: #bbdefb;
+}
+
+.number-input-group .MuiIconButton-root.Mui-disabled {
+  background-color: #f5f5f5;
+  opacity: 0.7;
+}
+
+.controls {
+  position: fixed;
+  bottom: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.capture-btn, .upload-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 50px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.capture-btn {
+  background: linear-gradient(45deg, #4CAF50, #45a049);
+}
+
+.upload-btn {
+  background: linear-gradient(45deg, #2196F3, #1976D2);
+}
+
+.controls button:disabled {
+  background: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.photo-grid {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.photo-item {
+  flex: 0 0 150px;
+  height: 150px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.error-message {
+  color: #f44336;
+  padding: 16px;
+  margin-bottom: 20px;
+  background-color: #ffebee;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(244,67,54,0.1);
+}
+
+.status-message {
+  color: #2196F3;
+  padding: 16px;
+  margin: 20px 0;
+  background-color: #e3f2fd;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(33,150,243,0.1);
+}
+
+.settings-btn {
+  background: linear-gradient(45deg, #9c27b0, #7b1fa2);
+  color: white;
+  padding: 12px;
+  border-radius: 50%;
+}
+
+.settings-item {
+  margin: 24px 0;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.capture-btn:not(:disabled):hover {
+  animation: pulse 1s infinite;
+}
+
+.thanks-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 24px 48px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  text-align: center;
+  z-index: 1000;
+}
+
+.thanks-message h5 {
+  color: #2196F3;
+  margin-bottom: 8px;
+}
+
+.thanks-message p {
+  color: #666;
+}
+
+.goodbye-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, #ffffff 0%, #f5f7fa 100%);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  text-align: center;
+  z-index: 1000;
+  min-width: 300px;
+}
+
+.waving-hand {
+  font-size: 48px !important;
+  color: #ffd700;
+  animation: wave 1s infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes wave {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-20deg); }
+  75% { transform: rotate(20deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ffd700;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.confetti::before,
+.confetti::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #ff69b4;
+  border-radius: 50%;
+  left: 15px;
+}
+
+.confetti::after {
+  background: #4caf50;
+  left: -15px;
+}
+
+.goodbye-message h4 {
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.goodbye-message p {
+  color: #666;
+}
+
+.input-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+.hint-box {
+  background: linear-gradient(145deg, #e3f2fd 0%, #bbdefb 100%);
+  border-left: 4px solid #2196f3;
+  margin-top: 0.6rem;
+  padding: 0.6rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+}
+
+.hint-box strong {
+  color: #1565c0;
+}
+
+.hint-box ul {
+  margin: 3px 0;
+  padding-left: 14px;
+}
+
+.hint-box li {
+  margin: 2px 0;
+}
+
+.input-field-container {
+  margin-bottom: 0.5rem;
+}
+
+.field-label {
+  color: #1976d2;
+  margin-bottom: 0.2rem;
+  display: block;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+/* Adjust input heights */
+.MuiOutlinedInput-root {
+  height: 30px;
+  font-size: 0.85rem;
+}
+
+/* Make icons smaller */
+.MuiIconButton-root {
+  padding: 3px;
+}
+
+.MuiIconButton-root svg {
+  font-size: 0.9rem;
+}
+
+/* Add smooth scrollbar styling */
+.settings-form::-webkit-scrollbar {
+  width: 8px;
+}
+
+.settings-form::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.settings-form::-webkit-scrollbar-thumb {
+  background: #90caf9;
+  border-radius: 10px;
+}
+
+.settings-form::-webkit-scrollbar-thumb:hover {
+  background: #64b5f6;
+}
+
+@media (max-width: 768px) {
+  .settings-panel {
+    padding: 16px;
+  }
+
+  .controls {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .capture-btn, .upload-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .camera-controls-top {
+    top: 70px;
+  }
+
+  .burst-button {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+/* Remove this class if it exists */
+.burst-button-overlay {
+  display: none; /* or remove this class entirely */
+}
